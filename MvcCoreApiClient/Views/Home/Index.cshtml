@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function(){
+            $("#btnpersonas").click(function(){
+                let url="https://apipersonaskbs-b0caccccdfaffvf4.germanywestcentral-01.azurewebsites.net/";
+                let request="api/personasapi"
+                $.ajax({
+                    url:url+request,
+                    method:"GET",
+                    success:function(data){
+                        console.log("TODO FUNCIONA")
+                        var html="";
+                        $.each(data,function(index,persona){
+                            html +="<tr>";
+                            html +="<td>"+persona.idPersona+"</td>";
+                            html +="<td>"+persona.nombre+"</td>";
+                            html +="<td>"+persona.email+"</td>";
+                            html +="<td>"+persona.edad+"</td>";
+                            html +="</tr>";
+                        })
+                        //Añadimos el html a la tabla
+                        $("#tablapersonas tbody").html(html);
+                    }
+                })
+            })
+        })
+    </script>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Api Personas Client</h1>
+
+    <button id="btnpersonas" class="btn btn-warning"> Load Personas</button>
+    <table class="table table-bordered" id="tablapersonas">
+    <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Edad</th>
+            </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+</div>
+
