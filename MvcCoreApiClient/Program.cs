@@ -1,4 +1,9 @@
+using MvcCoreApiClient.Service;
+
 var builder = WebApplication.CreateBuilder(args);
+
+//------AÑADIMOS EL SERVICIO----- 
+builder.Services.AddTransient<ServiceHospitales>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

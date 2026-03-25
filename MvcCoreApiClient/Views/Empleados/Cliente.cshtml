@@ -1,0 +1,48 @@
+﻿@section Scripts {
+
+    <script>
+        $(document).ready(function(){
+            $("#btnempleados").click(function(){
+                let url="https://apicoreempleadosrouteskbs.azurewebsites.net/";
+                let request="api/empleados"
+                $.ajax({
+                    url:url+request,
+                    method:"GET",
+                    success:function(data){
+                        console.log("EMPLEADOS FUNCIONAL")
+                        var html="";
+                        $.each(data,function(index,empleado){
+                            html +="<tr>";
+                            html +="<td>"+empleado.idEmpleado+"</td>";
+                            html +="<td>"+empleado.apellido+"</td>";
+                            html +="<td>"+empleado.oficio+"</td>";
+                            html +="<td>"+empleado.salario+"</td>";
+                            html +="<td>"+empleado.idDept+"</td>";
+                            html +="</tr>";
+                        })
+                        //Añadimos el html a la tabla
+                        $("#tablaempleados tbody").html(html);
+                    }
+                })
+            })
+        })
+    </script>
+}
+
+<div class="text-center">
+    <h1 class="display-4" style="color:forestgreen">Api EMPLEADOS Client</h1>
+
+    <button id="btnempleados" class="btn btn-warning"> Load EMPLEADOS</button>
+    <table class="table table-dark" id="tablaempleados">
+        <thead>
+            <tr>
+                <th>EMP_NO</th>
+                <th>Apellido</th>
+                <th>oficio</th>
+                <th>salario</th>
+                <th>idDept</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
